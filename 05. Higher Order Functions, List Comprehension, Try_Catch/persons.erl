@@ -15,8 +15,8 @@ update(Fun, Persons) -> lists:map(Fun, Persons).
 
 get_average_age([]) -> io:format("List can't be empty!\n"), {error, badarg};
 get_average_age(Persons) ->
-    Get_persons_number_and_age_sum = fun(#person{age = Age}, {Count, AgeSum}) -> {Count+1, AgeSum+Age} end,
-    {_PersonsCount, _AgeSum} = lists:foldl(Get_persons_number_and_age_sum, {0, 0}, Persons),
+    getPersonsNumberAndAgeSum = fun(#person{age = Age}, {Count, AgeSum}) -> {Count+1, AgeSum+Age} end,
+    {_PersonsCount, _AgeSum} = lists:foldl(getPersonsNumberAndAgeSum, {0, 0}, Persons),
     {ok, _AgeSum/_PersonsCount}.
 
 % UpdateJackAge = fun(

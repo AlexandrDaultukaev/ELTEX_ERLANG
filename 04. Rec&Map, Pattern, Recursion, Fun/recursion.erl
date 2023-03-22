@@ -1,5 +1,5 @@
 -module(recursion).
--export([fac/1, fac/2, duplicate/1, tail_duplicate/1]).
+-export([fac/1, fac/2, duplicate/1, tail_duplicate/1, tail_duplicate/2]).
 
 fac(N) when is_integer(N) ->
     fac(N, 1);
@@ -12,18 +12,11 @@ fac(N, Acc) when N > 0 ->
 
 duplicate([]) ->
     [];
-duplicate([Head | Tail]) ->
-    [Head, Head] ++ duplicate(Tail);
-duplicate(Error) ->
-    io:format("Error argument ~p~n", [Error]),
-    {error, badarg}.
+duplicate([Head | Tail] = List) when is_list(List) ->
+    [Head, Head] ++ duplicate(Tail).
 
-tail_duplicate([]) -> [];
-tail_duplicate([Head|Tail]) ->
-    tail_duplicate([Head|Tail],[]);
-tail_duplicate(Error) ->
-    io:format("Error argument ~p~n",[Error]),
-    {error, badarg}.
+tail_duplicate(List) when is_list(List) ->
+    tail_duplicate(List,[]).
 
 tail_duplicate([],Acc) -> lists:reverse(Acc);
 tail_duplicate([Head|Tail],Acc) ->
